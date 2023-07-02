@@ -16,6 +16,11 @@
                       >
                 删除
             </el-button>
+            <router-link :to="'/core/integral-grade/edit/' + scope.row.id" style="margin-right:5px;" >
+                <el-button type="primary" size="mini" icon="el-icon-edit">
+                    修改
+                </el-button>
+            </router-link>
         </template>
       </el-table-column>
     </el-table>
