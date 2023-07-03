@@ -1,12 +1,12 @@
 <template>
     <div class="app-container">
         <div style="margin-bottom: 10px;">
-            
-<el-table :data="list" border row-key="id" lazy :load="getChildren">
-    <el-table-column label="名称" align="left" prop="name" />
-    <el-table-column label="编码" prop="dictCode" />
-    <el-table-column label="值" align="left" prop="value" />
-</el-table>
+
+            <el-table :data="list" border row-key="id" lazy :load="getChildren">
+                <el-table-column label="名称" align="left" prop="name" />
+                <el-table-column label="编码" prop="dictCode" />
+                <el-table-column label="值" align="left" prop="value" />
+            </el-table>
             <el-button @click="dialogVisible = true" type="primary" size="mini" icon="el-icon-download">
                 导入Excel
             </el-button>
@@ -39,7 +39,7 @@ export default {
     data() {
         return {
             //文件上传对话框是否显示
-            dialogVisible: false, 
+            dialogVisible: false,
             //获取后端接口地址
             BASE_API: process.env.VUE_APP_BASE_API,
             //数据字典列表
