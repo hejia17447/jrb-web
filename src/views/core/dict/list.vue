@@ -4,6 +4,7 @@
             <el-button @click="dialogVisible = true" type="primary" size="mini" icon="el-icon-download">
                 导入Excel
             </el-button>
+            <el-button @click="exportData" type="primary" size="mini" icon="el-icon-upload2">导出Excel</el-button>
         </div>
         <el-dialog title="数据字典导入" :visible.sync="dialogVisible" width="30%">
             <el-form>
@@ -50,6 +51,10 @@ export default {
         //上传失败回调
         fileUploadError(error) {
             this.$message.error('数据导入失败')
+        },
+        //Excel数据导出
+        exportData() {
+            window.location.href = this.BASE_API + '/admin/core/dict/export'
         }
     }
 }
