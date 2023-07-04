@@ -69,6 +69,16 @@
                     </el-tag>
                 </template>
             </el-table-column>
+            <el-table-column label="操作" align="center" width="200">
+                <template slot-scope="scope">
+                    <el-button v-if="scope.row.status == 1" type="primary" size="mini" @click="lock(scope.row.id, 0)">
+                        锁定
+                    </el-button>
+                    <el-button v-else type="danger" size="mini" @click="lock(scope.row.id, 1)">
+                        解锁
+                    </el-button>
+                </template>
+            </el-table-column>
         </el-table>
 
         <!-- 分页组件 -->
@@ -132,6 +142,14 @@ export default {
         resetData() {
             this.searchObj = {}
             this.fetchData()
+        },
+
+        // 锁定与解锁
+        lock(id, status) {
+            userInfoApi.lock(id, status).then(response => {
+                this.$message.success(response.message)
+                this.fetchData()
+            })
         }
 
     },
