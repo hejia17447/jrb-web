@@ -14,6 +14,13 @@ export default {
             url: `/admin/core/userInfo/lock/${id}/${status}`,
             method: 'put'
         })
+    },
+
+    getuserLoginRecordTop(userId) {
+        return request({
+            url: `/admin/core/userLoginRecord/listTop/${userId}`,
+            method: 'get'
+        })
     }
 
 

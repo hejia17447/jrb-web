@@ -77,6 +77,9 @@
                     <el-button v-else type="danger" size="mini" @click="lock(scope.row.id, 1)">
                         解锁
                     </el-button>
+                    <el-button type="primary" size="mini" @click="showLoginRecord(scope.row.id)">
+                        登录日志
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -85,6 +88,14 @@
         <el-pagination :current-page="page" :total="total" :page-size="limit" :page-sizes="[10, 20]"
             style="padding: 30px 0; " layout="total, sizes, prev, pager, next, jumper" @size-change="changePageSize"
             @current-change="changeCurrentPage" />
+        <!-- 用户登录日志 -->
+        <el-dialog title="用户登录日志" :visible.sync="dialogTableVisible">
+            <el-table :data="loginRecordList" border stripe>
+                <el-table-column type="index" />
+                <el-table-column prop="ip" label="IP" />
+                <el-table-column prop="createTime" label="登录时间" />
+            </el-table>
+        </el-dialog>
     </div>
 </template>
 
@@ -149,6 +160,16 @@ export default {
             userInfoApi.lock(id, status).then(response => {
                 this.$message.success(response.message)
                 this.fetchData()
+            })
+        },
+
+        // 根据id查询会员日志记录
+        showLoginRecord(id) {
+            //打开对话框
+            this.dialogTableVisible = true
+            //加载数据列表
+            userInfoApi.getuserLoginRecordTop(id).then(response => {
+                this.loginRecordList = response.data.list
             })
         }
 
